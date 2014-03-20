@@ -1,0 +1,64 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="app-web:war exploded">
+    <output-path>$PROJECT_DIR$/application/app-web/target/webapp</output-path>
+    <properties id="ant-preprocessing">
+      <options enabled="true" />
+    </properties>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="app-web/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="app-web" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="archive" name="spring-app-api-1.jar">
+            <element id="module-output" name="app-api" />
+          </element>
+          <element id="library" level="project" name="Maven: org.hibernate:hibernate-core:3.6.2.Final" />
+          <element id="library" level="project" name="Maven: antlr:antlr:2.7.6" />
+          <element id="library" level="project" name="Maven: commons-collections:commons-collections:3.1" />
+          <element id="library" level="project" name="Maven: dom4j:dom4j:1.6.1" />
+          <element id="library" level="project" name="Maven: org.hibernate:hibernate-commons-annotations:3.2.0.Final" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.5.10" />
+          <element id="library" level="project" name="Maven: org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.0.Final" />
+          <element id="library" level="project" name="Maven: javax.transaction:jta:1.1" />
+          <element id="library" level="project" name="Maven: org.hibernate:hibernate-validator:4.2.0.Final" />
+          <element id="library" level="project" name="Maven: javax.validation:validation-api:1.0.0.GA" />
+          <element id="library" level="project" name="Maven: org.hibernate:hibernate-entitymanager:3.5.3-Final" />
+          <element id="library" level="project" name="Maven: cglib:cglib:2.2" />
+          <element id="library" level="project" name="Maven: asm:asm:3.1" />
+          <element id="library" level="project" name="Maven: javassist:javassist:3.12.1.GA" />
+          <element id="library" level="project" name="Maven: commons-dbcp:commons-dbcp:1.4" />
+          <element id="library" level="project" name="Maven: commons-pool:commons-pool:1.5.4" />
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.18" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-context:3.1.0.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-aop:3.1.0.RELEASE" />
+          <element id="library" level="project" name="Maven: aopalliance:aopalliance:1.0" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-asm:3.1.0.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-beans:3.1.0.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-core:3.1.0.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-expression:3.1.0.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:3.1.0.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-context-support:3.1.0.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-web:3.1.0.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-tx:3.1.0.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-oxm:3.0.5.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-orm:3.1.0.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:3.1.0.RELEASE" />
+          <element id="library" level="project" name="Maven: org.slf4j:jcl-over-slf4j:1.5.10" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-log4j12:1.5.10" />
+          <element id="library" level="project" name="Maven: log4j:log4j:1.2.15" />
+          <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
+          <element id="library" level="project" name="Maven: org.codehaus.jackson:jackson-mapper-asl:1.9.9" />
+          <element id="library" level="project" name="Maven: org.codehaus.jackson:jackson-core-asl:1.9.9" />
+          <element id="library" level="project" name="Maven: javax.xml.bind:jaxb-api:2.2.4" />
+          <element id="library" level="project" name="Maven: javax.xml.stream:stax-api:1.0-2" />
+          <element id="library" level="project" name="Maven: javax.activation:activation:1.1" />
+          <element id="archive" name="spring-app-impl-1.jar">
+            <element id="module-output" name="app-impl" />
+          </element>
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

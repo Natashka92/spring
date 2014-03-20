@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:mvc="http://www.springframework.org/schema/mvc"
+             xmlns:p="http://www.springframework.org/schema/p"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xsi:schemaLocation="http://www.springframework.org/schema/mvc
+                        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+                        http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <resources mapping="/resources/**" location="/resources/" />
+
+    <beans:bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+        <beans:property name="mediaTypes">
+            <beans:map>
+                <beans:entry key="xml" value="application/xml"/>
+                <beans:entry key="html" value="text/html"/>
+                <beans:entry key="json" value="application/json"/>
+            </beans:map>
+        </beans:property>
+
+        <beans:property name="viewResolvers">
+            <beans:list>
+                <beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
+                <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+                    <beans:property name="prefix" value="/WEB-INF/views/"/>
+                    <beans:property name="suffix" value=".jsp"/>
+                </beans:bean>
+            </beans:list>
+        </beans:property>
+    </beans:bean>
+
+    <beans:bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerExceptionResolver" p:order="1" />
+    <beans:bean class="com.common.exception.ExceptionHandler" p:order="2">
+        <beans:property name="defaultErrorView" value="errorPage"/>
+    </beans:bean>
+
+    <beans:bean id="tilesViewResolver" class="org.springframework.js.ajax.AjaxUrlBasedViewResolver">
+        <beans:property name="viewClass" value="org.springframework.js.ajax.tiles2.AjaxTilesView"/>
+    </beans:bean>
+
+    <beans:bean id="localeChangeInterceptor"
+          class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+        <beans:property name="paramName" value="lang"/>
+    </beans:bean>
+    <beans:bean id="localeResolver"
+          class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+        <beans:property name="defaultLocale" value="ru"/>
+    </beans:bean>
+    <beans:bean id="handlerMapping"
+          class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+        <beans:property name="interceptors">
+            <beans:ref bean="localeChangeInterceptor"/>
+        </beans:property>
+    </beans:bean>
+    <mvc:interceptors>
+        <beans:bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+            <beans:property name="paramName" value="lang"/>
+        </beans:bean>
+    </mvc:interceptors>
+
+    <mvc:annotation-driven validator="validator"/>
+    <beans:bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <beans:property name="messageInterpolator">
+            <beans:bean class="org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpolator">
+                <beans:constructor-arg index="0">
+                    <beans:bean class="org.springframework.validation.beanvalidation.MessageSourceResourceBundleLocator">
+                        <beans:constructor-arg index="0" ref="messageSource"/>
+                    </beans:bean>
+                </beans:constructor-arg>
+            </beans:bean>
+        </beans:property>
+    </beans:bean>
+
+    <beans:import resource="controller.xml" />
+</beans:beans>

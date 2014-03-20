@@ -1,0 +1,37 @@
+<beans:beans xmlns:security="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+                 http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                 http://www.springframework.org/schema/security
+                 http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+    <security:http security="none" pattern="/login"/>
+    <security:http use-expressions="true">
+    <!--<security:http auto-config="true">-->
+        <security:form-login
+            login-page="/login"
+            default-target-url="/"
+            always-use-default-target="true"
+            authentication-failure-url="/login"/>
+        <security:anonymous username="guest" granted-authority="ROLE_ANONYMOUS"/>
+        <security:session-management invalid-session-url="/login">
+            <security:concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />
+        </security:session-management>
+        <security:logout logout-success-url="/login" logout-url="/logout" invalidate-session="true" delete-cookies="JSESSIONID"/>
+    </security:http>
+
+    <security:authentication-manager>
+        <security:authentication-provider user-service-ref='securityServiceImpl'>
+            <security:password-encoder ref="passwordEncoder"/>
+        </security:authentication-provider>
+    </security:authentication-manager>
+
+    <beans:bean id="securityServiceImpl"
+                class="com.common.services.security.SecurityServiceImpl">
+    </beans:bean>
+
+    <beans:bean id="passwordEncoder"
+                class="com.common.services.security.PasswordEncoder">
+    </beans:bean>
+</beans:beans>
