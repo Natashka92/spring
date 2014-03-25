@@ -12,5 +12,4 @@
 
     <context:component-scan base-package="com.common.controller" />
     <security:global-method-security secured-annotations="enabled" />
-
 </beans>

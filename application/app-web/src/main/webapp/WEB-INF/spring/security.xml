@@ -8,7 +8,6 @@
 
     <security:http security="none" pattern="/login"/>
     <security:http use-expressions="true">
-    <!--<security:http auto-config="true">-->
         <security:form-login
             login-page="/login"
             default-target-url="/"
@@ -20,17 +19,14 @@
         </security:session-management>
         <security:logout logout-success-url="/login" logout-url="/logout" invalidate-session="true" delete-cookies="JSESSIONID"/>
     </security:http>
-
     <security:authentication-manager>
         <security:authentication-provider user-service-ref='securityServiceImpl'>
             <security:password-encoder ref="passwordEncoder"/>
         </security:authentication-provider>
     </security:authentication-manager>
-
     <beans:bean id="securityServiceImpl"
                 class="com.common.services.security.SecurityServiceImpl">
     </beans:bean>
-
     <beans:bean id="passwordEncoder"
                 class="com.common.services.security.PasswordEncoder">
     </beans:bean>

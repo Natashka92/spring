@@ -10,7 +10,6 @@
                         http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
     <resources mapping="/resources/**" location="/resources/" />
-
     <beans:bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
         <beans:property name="mediaTypes">
             <beans:map>
@@ -30,16 +29,13 @@
             </beans:list>
         </beans:property>
     </beans:bean>
-
     <beans:bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerExceptionResolver" p:order="1" />
     <beans:bean class="com.common.exception.ExceptionHandler" p:order="2">
         <beans:property name="defaultErrorView" value="errorPage"/>
     </beans:bean>
-
     <beans:bean id="tilesViewResolver" class="org.springframework.js.ajax.AjaxUrlBasedViewResolver">
         <beans:property name="viewClass" value="org.springframework.js.ajax.tiles2.AjaxTilesView"/>
     </beans:bean>
-
     <beans:bean id="localeChangeInterceptor"
           class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
         <beans:property name="paramName" value="lang"/>
@@ -59,7 +55,6 @@
             <beans:property name="paramName" value="lang"/>
         </beans:bean>
     </mvc:interceptors>
-
     <mvc:annotation-driven validator="validator"/>
     <beans:bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
         <beans:property name="messageInterpolator">
@@ -72,6 +67,5 @@
             </beans:bean>
         </beans:property>
     </beans:bean>
-
     <beans:import resource="controller.xml" />
 </beans:beans>
