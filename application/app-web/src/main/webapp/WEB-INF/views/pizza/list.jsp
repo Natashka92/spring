@@ -74,7 +74,6 @@
                         $(this).dialog("close");
                     }
                 }
-
             });
             $("#create-pizza")
                 .button()
