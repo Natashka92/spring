@@ -17,6 +17,27 @@
         h1 { font-size: 1.2em; margin: .6em 0; }
     </style>
     <script type="text/javascript">
+        var Delete = function(event){
+            $.ajax({
+                url: $(event.target).attr("href"),
+                type: "DELETE",
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader("Accept", "application/json");
+                    xhr.setRequestHeader("Content-Type", "application/json");
+                },
+                success: function() {
+                    var respContent = "";
+                    var rowToDelete = $(event.target).closest("tr");
+                    rowToDelete.remove();
+                    respContent += "<spring:message code='label.pizza.delete.success'/>";
+                    $("#formResponseDelete").text(respContent).show().delay(2500).fadeOut(2500);
+                },
+                error: function(xhr, status, err) {
+                    $("#formResponseDelete").text(xhr.responseText).show().delay(3500).fadeOut(2500);
+                }
+            });
+            event.preventDefault();
+        }
         $(function() {
             $("#dialog-form").dialog({
                 autoOpen: false,
@@ -76,7 +97,6 @@
     <spring:message code="title.label.pizza.id" var="id"/>
     <spring:message code="label.pizza.list" var="listPizza"/>
     <spring:message code="button.pizza.create" var="AddPizza"/>
-
     <spring:message code="label.back.home" var="BackHome"/>
     <spring:message code="label.hello" var="hello"/>
     <spring:message code="label.logout" var="logout"/>
@@ -110,12 +130,16 @@
         <div class ="tab-content" id="pizzas-contain">
 
             <h2>${listPizzaLabel}</h2>
+            <div id="formResponseDelete" style="color: darkgreen;"></div>
             <table id="pizzas" class="table table-bordered table-hover table-striped">
               <thead class="success">
                   <tr class="success">
                       <td>${id}</td>
                       <td>${name}</td>
                       <td>${price}</td>
+                      <sec:authorize access="hasRole('ROLE_ADMIN')">
+                        <td></td>
+                      </sec:authorize>
                   </tr>
               </thead>
               <tbody>
@@ -124,11 +148,18 @@
                           <td>${pizza.id}</td>
                           <td>${pizza.name}</td>
                           <td>${pizza.price}</td>
+                          <sec:authorize access="hasRole('ROLE_ADMIN')">
+                              <td>
+                                  <img style="cursor: hand;" href="${pageContext.request.contextPath}/pizza/${pizza.id}" onclick="Delete(event)" src="<c:url value='/resources/images/delete.png'/>" width="25px" height="25px" alt="${delete}" />
+                              </td>
+                          </sec:authorize>
                       </tr>
                   </c:forEach>
               </tbody>
             </table>
-            <button id="create-pizza">${AddPizza}</button>
+            <sec:authorize access="hasRole('ROLE_ADMIN')">
+                <button id="create-pizza">${AddPizza}</button>
+            </sec:authorize>
         </div>
     </div>
 </div>

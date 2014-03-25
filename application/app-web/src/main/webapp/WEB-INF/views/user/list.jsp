@@ -7,7 +7,9 @@
     <title><spring:message code="label.user.list"/></title>
     <link href="<c:url value="/resources/bootstrap/bootstrap.css" />" rel="stylesheet"  type="text/css" />
     <link href="<c:url value="/resources/bootstrap/bootstrap.min.css" />" rel="stylesheet"  type="text/css" />
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     <script type="text/javascript">
         var Delete = function(event){
             $.ajax({
@@ -46,7 +48,10 @@
     <spring:message code="page.home" var="home"/>
     <spring:message code="title.label.pizza" var="pizza"/>
     <spring:message code="title.label.user" var="user"/>
-
+    <spring:message code="label.user.edit" var="editUserLabel"/>
+    <spring:message code="title.label.user.password" var="password"/>
+    <spring:message code="button.user.save" var="save"/>
+    <spring:message code="label.pizza.list" var="listOfPizzas"/>
     <%@ include file="../common/hello.jsp"%>
 
     <div class="tabbable">
@@ -57,44 +62,44 @@
                 <li class="active"><a href="#">${user}</a></li>
             </sec:authorize>
         </ul>
-
-        <div class ="tab-content">
+           <div class ="tab-content">
             <h2>${listUserLabel}</h2>
             <div id="formResponse" style="color: darkgreen;"></div>
             <table class="table table-bordered table-hover table-striped">
-                    <thead class="success">
-                        <tr class="success">
-                            <td>${id}</td>
-                            <td>${login}</td>
-                            <td>${firstName}</td>
-                            <td>${lastName}</td>
-                            <td>${address}</td>
-                            <td></td>
-                            <td></td>
+                <thead class="success">
+                    <tr class="success">
+                        <td>${id}</td>
+                        <td>${login}</td>
+                        <td>${firstName}</td>
+                        <td>${lastName}</td>
+                        <td>${address}</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach var="user" items="${userList}">
+                        <tr>
+                            <td>${user.id}</td>
+                            <td>${user.login}</td>
+                            <td>${user.firstName}</td>
+                            <td>${user.lastName}</td>
+                            <td>${user.address}</td>
+                            <td>
+                                <a href="edit/${user.id}">
+                                    <img src="<c:url value='/resources/images/edit.png'/>" width="25px" height="25px" alt="${edit}"/>
+                                </a>
+                            </td>
+                            <td>
+                                <img style="cursor: hand;" href="${pageContext.request.contextPath}/user/${user.id}" onclick="Delete(event)" src="<c:url value='/resources/images/delete.png'/>" width="25px" height="25px" alt="${delete}" />
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach var="user" items="${userList}">
-                            <tr>
-                                <td>${user.id}</td>
-                                <td>${user.login}</td>
-                                <td>${user.firstName}</td>
-                                <td>${user.lastName}</td>
-                                <td>${user.address}</td>
-                                <td>
-                                    <a href="edit/${user.id}" >
-                                        <img src="<c:url value='/resources/images/edit.png'/>" width="25px" height="25px" alt="${edit}"/>
-                                    </a>
-                                </td>
-                                <td>
-                                    <img style="cursor: hand;" href="${pageContext.request.contextPath}/user/${user.id}" onclick="Delete(event)" src="<c:url value='/resources/images/delete.png'/>" width="25px" height="25px" alt="${delete}" />
-                                </td>
-                            </tr>
-                        </c:forEach>
-                    <tbody>
-                </table>
+                    </c:forEach>
+                <tbody>
+            </table>
         </div>
     </div>
 </div>
+
 </body>
 </html>  
